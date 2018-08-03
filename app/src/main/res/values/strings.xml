@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MyG_Ghub</string>
+    <string name="github_sign_in_button">GitHub로 로그인</string>
+    <string name="github_logo">Github Logo</string>
+    <string name="feed">Feed</string>
+    <string name="search">Search</string>
+    <string name="notification">Notification</string>
+    <string name="myprofile">MyProfile</string>
 </resources>
