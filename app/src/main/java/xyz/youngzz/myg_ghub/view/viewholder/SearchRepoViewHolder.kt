@@ -1,0 +1,10 @@
+package xyz.youngzz.myg_ghub.view.viewholder
+
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import xyz.youngzz.myg_ghub.R
+
+class SearchRepoViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.list_item_sample, parent, false)
+)
