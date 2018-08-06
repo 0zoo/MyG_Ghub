@@ -20,13 +20,11 @@ class FragmentSearch : Fragment() {
 
     companion object {
         fun newInstance(): FragmentSearch {
-
             val fragmentSearch = FragmentSearch()
             val args = Bundle()
             fragmentSearch.arguments = args
             return fragmentSearch
         }
-
     }
 
     lateinit var listAdapter: SearchRepoListAdapter

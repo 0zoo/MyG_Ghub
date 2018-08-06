@@ -8,3 +8,7 @@ import xyz.youngzz.myg_ghub.R
 class SearchRepoViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.list_item_sample, parent, false)
 )
+
+class NewsViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.list_item_news, parent, false)
+)

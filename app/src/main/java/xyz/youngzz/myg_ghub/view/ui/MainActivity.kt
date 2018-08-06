@@ -4,24 +4,29 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.widget.FrameLayout
 import xyz.youngzz.myg_ghub.R
+import xyz.youngzz.myg_ghub.api.model.User
+import xyz.youngzz.myg_ghub.api.provideGithubApi
+import xyz.youngzz.myg_ghub.utils.enqueue
 import xyz.youngzz.myg_ghub.view.ui.fragment.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private var content: FrameLayout? = null
+    private lateinit var user: User
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigationFeed -> {
-                val fragment = FragmentFeed()
+            R.id.navigationNews -> {
+                val fragment = FragmentNews.newInstance(user.login)
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationSearch -> {
-                val fragment = FragmentSearch.newInstance()
+                val fragment = FragmentSearch()
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -47,6 +52,25 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+        provideGithubApi(this).getCurrentUser().enqueue({ response ->
+            val statusCode = response.code()
+            if (statusCode == 200) {
+                val result = response.body()
+                result?.let {
+                   Log.i(TAG,it.toString())
+                    user = it
+                }
+
+            } else {
+                Log.e(TAG,"error - $statusCode")
+            }
+
+        }, { t ->
+            Log.e(TAG,t.localizedMessage)
+        })
+
 
 
         val fragment = FragmentSearch.newInstance()
