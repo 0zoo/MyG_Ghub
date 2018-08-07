@@ -7,11 +7,12 @@ import android.os.Bundle
 import android.support.customtabs.CustomTabsIntent
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.authApi
+import xyz.youngzz.myg_ghub.api.getToken
 import xyz.youngzz.myg_ghub.api.updateToken
 import xyz.youngzz.myg_ghub.utils.enqueue
 
@@ -28,6 +29,12 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
+        Timber.plant(Timber.DebugTree())
+
+        getToken(this)?.let{
+            Timber.i("이미 로그인한")
+            startActivity<MainActivity>()
+        }
 
         signInButton.setOnClickListener {
             val authUri = Uri.Builder().scheme("https")
@@ -70,7 +77,7 @@ class SignInActivity : AppCompatActivity() {
 
                 updateToken(this, it.accessToken)
 
-                Log.i(TAG, it.toString())
+                Timber.i( it.toString())
 
                 startActivity<MainActivity>()
 

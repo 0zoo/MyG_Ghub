@@ -3,11 +3,11 @@ package xyz.youngzz.myg_ghub.view.ui.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_news.view.*
+import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.provideGithubApi
 import xyz.youngzz.myg_ghub.utils.enqueue
@@ -22,7 +22,7 @@ class FragmentNews : Fragment() {
         fun newInstance(ownerLogin: String): FragmentNews {
             val fragment = FragmentNews()
             val args = Bundle()
-            args.putString("LOGIN",ownerLogin)
+            args.putString("LOGIN", ownerLogin)
             fragment.arguments = args
             return fragment
         }
@@ -31,33 +31,32 @@ class FragmentNews : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if(arguments != null){
-            login = arguments!!.getString("LOGIN")
-
-            val githubApi = provideGithubApi(requireContext())
-
-            val call = githubApi.recievedEvents(login)
+        arguments?.let { args ->
+            //login = args.getString("LOGIN")
+            login = "ahndwon"
+            val call = provideGithubApi(requireContext()).recievedEvents(login)
             call.enqueue({ response ->
                 val statusCode = response.code()
                 if (statusCode == 200) {
                     val result = response.body()
                     result?.let {
-                        Log.i("FragmentNews",it.toString())
+                        Timber.i(it.toString())
                         listAdapter.items = it
                         listAdapter.notifyDataSetChanged()
                     }
 
                 } else {
-                    Log.e("FragmentNews","error - $statusCode")
+                    Timber.e("error - $statusCode")
                 }
 
 
-            }, { t ->
-                Log.e("FragmentNews",t.localizedMessage)
+            }, {
+                Timber.e(it.localizedMessage)
             })
-        }else{
-            Log.i("FragmentNews","none!!!!!!!!1")
+
         }
+
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

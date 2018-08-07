@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.FrameLayout
+import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.model.User
 import xyz.youngzz.myg_ghub.api.provideGithubApi
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private var content: FrameLayout? = null
     private lateinit var user: User
+    private lateinit var fragments : List<Fragment>
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -59,16 +60,16 @@ class MainActivity : AppCompatActivity() {
             if (statusCode == 200) {
                 val result = response.body()
                 result?.let {
-                   Log.i(TAG,it.toString())
+                   Timber.i(it.toString())
                     user = it
                 }
 
             } else {
-                Log.e(TAG,"error - $statusCode")
+                Timber.e("error - $statusCode")
             }
 
         }, { t ->
-            Log.e(TAG,t.localizedMessage)
+            Timber.e(t.localizedMessage)
         })
 
 
@@ -94,6 +95,8 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.content, fragment, fragment.javaClass.simpleName)
                 .commit()
     }
+
+
 
 }
 

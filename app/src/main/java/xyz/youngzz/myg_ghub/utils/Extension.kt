@@ -1,13 +1,17 @@
 package xyz.youngzz.myg_ghub.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.support.design.internal.BottomNavigationItemView
 import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
-import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
+import xyz.youngzz.myg_ghub.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun <T> Call<T>.enqueue(success: (response: Response<T>) -> Unit, failure: (t: Throwable) -> Unit) {
     enqueue(object : Callback<T> {
@@ -15,8 +19,6 @@ fun <T> Call<T>.enqueue(success: (response: Response<T>) -> Unit, failure: (t: T
         override fun onFailure(call: Call<T>, t: Throwable) = failure(t)
     })
 }
-
-
 
 @SuppressLint("RestrictedApi")
 fun BottomNavigationView.disableShiftMode() {
@@ -33,8 +35,68 @@ fun BottomNavigationView.disableShiftMode() {
             item.setChecked(item.itemData.isChecked)
         }
     } catch (e: NoSuchFieldException) {
-        Log.e("ERROR NO SUCH FIELD", "Unable to get shift mode field")
+        Timber.tag("ERROR NO SUCH FIELD").e("Unable to get shift mode field")
     } catch (e: IllegalStateException) {
-        Log.e("ERROR ILLEGAL ALG", "Unable to change value of shift mode")
+        Timber.tag("ERROR ILLEGAL ALG").e("Unable to change value of shift mode")
     }
 }
+
+fun String.convertEventType(ctx: Context): String {
+    when (this) {
+        "CreateEvent" -> return ctx.getString(R.string.created)
+        "WatchEvent" -> return ctx.getString(R.string.starred)
+        "ForkEvent" -> return ctx.getString(R.string.fork)
+        "PushEvent" -> return ctx.getString(R.string.push)
+    }
+    return this
+}
+
+fun String.getDateFromISO(): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+    val millis = Date().time - dateFormat.parse(this).time
+
+    val sec = millis / 1000
+    val min = millis / (60 * 1000)
+    val hour = millis / (60 * 60 * 1000)
+    val day = millis / (24 * 60 * 60 * 1000)
+    val week = millis / (7 * 24 * 60 * 60 * 1000)
+    val month = (millis / (30.5 * 24 * 60 * 60 * 1000)).toInt()
+    //val year = day / 365
+
+    if (day >= 365) {
+        return "${(day / 365)}년 전"
+    } else if (month > 0) {
+        return "${month}달 전"
+    } else if (week > 0){
+        return "${week}주 전"
+    }else if (day > 0){
+        return "${day}일 전"
+    }else if (hour > 0){
+        return "${hour}시간 전"
+    }else if (min > 0){
+        return "${min}분 전"
+    }else {
+        return "${sec}초 전"
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

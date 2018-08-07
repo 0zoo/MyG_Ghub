@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.provideGithubApi
 import xyz.youngzz.myg_ghub.utils.enqueue
@@ -51,7 +51,7 @@ class FragmentSearch : Fragment() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.i("onQueryTextSubmit", query)
+                Timber.i(query)
                 if(!query.isNullOrBlank()) {
 
                     val githubApi = provideGithubApi(requireContext())
@@ -68,12 +68,12 @@ class FragmentSearch : Fragment() {
 
 
                         } else {
-                            //toast("error - $statusCode")
+                            Timber.e("error - $statusCode")
                         }
 
 
                     }, { t ->
-                        //toast(t.localizedMessage)
+                        Timber.e(t.localizedMessage)
                     })
 
                 }
@@ -81,7 +81,7 @@ class FragmentSearch : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                Log.i("onQueryTextChange", newText)
+                Timber.i( newText)
                 return true
             }
         })

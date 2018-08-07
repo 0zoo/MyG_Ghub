@@ -6,4 +6,11 @@
     <string name="search">Search</string>
     <string name="notification">Notification</string>
     <string name="myprofile">MyProfile</string>
+
+    <!-- received events strings -->
+    <string name="starred">starring a repository</string>
+    <string name="created">created repository</string>
+    <string name="fork">forks a repository</string>
+    <string name="push">push to a repository branch</string>
+
 </resources>

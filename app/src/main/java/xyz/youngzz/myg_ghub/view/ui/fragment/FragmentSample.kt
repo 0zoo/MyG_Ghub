@@ -11,7 +11,6 @@ import xyz.youngzz.myg_ghub.R
 class FragmentSample : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //textView.text = "sample"
         return inflater.inflate(R.layout.fragment_sample, container, false)
     }
 }

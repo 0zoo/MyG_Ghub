@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import xyz.youngzz.myg_ghub.api.model.RecievedEventsResponse
+import xyz.youngzz.myg_ghub.api.model.ReceivedEventsResponse
 import xyz.youngzz.myg_ghub.api.model.RepoSearchResponse
 import xyz.youngzz.myg_ghub.api.model.User
 
@@ -16,7 +16,7 @@ interface GithubApi {
     fun getCurrentUser(): Call<User>
 
     @GET("users/{login}/received_events")
-    fun recievedEvents(@Path("login") login : String): Call<List<RecievedEventsResponse>>
+    fun recievedEvents(@Path("login") login : String): Call<List<ReceivedEventsResponse>>
 
 
 }

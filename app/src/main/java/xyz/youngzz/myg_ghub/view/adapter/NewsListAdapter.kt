@@ -4,12 +4,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.list_item_news.view.*
 import xyz.youngzz.myg_ghub.R
-import xyz.youngzz.myg_ghub.api.model.RecievedEventsResponse
+import xyz.youngzz.myg_ghub.api.model.ReceivedEventsResponse
 import xyz.youngzz.myg_ghub.utils.GlideApp
+import xyz.youngzz.myg_ghub.utils.convertEventType
+import xyz.youngzz.myg_ghub.utils.getDateFromISO
 import xyz.youngzz.myg_ghub.view.viewholder.NewsViewHolder
 
 class NewsListAdapter : RecyclerView.Adapter<NewsViewHolder>() {
-    var items: List<RecievedEventsResponse> = emptyList()
+    var items: List<ReceivedEventsResponse> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         return NewsViewHolder(parent)
@@ -27,9 +29,9 @@ class NewsListAdapter : RecyclerView.Adapter<NewsViewHolder>() {
             val repo = item.repo
 
             actorNameTextView.text = user.login
-            eventTypeTextView.text = item.type
+            eventTypeTextView.text = item.type.convertEventType(context)
             repoNameTextView.text = repo.name
-            createdAtTextView.text = item.createdAt
+            createdAtTextView.text = item.createdAt.getDateFromISO()
 
             GlideApp.with(this)
                     .load(user.avatarUrl)
