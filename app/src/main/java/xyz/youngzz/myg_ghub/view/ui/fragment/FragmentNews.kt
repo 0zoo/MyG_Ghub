@@ -32,8 +32,7 @@ class FragmentNews : Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let { args ->
-            //login = args.getString("LOGIN")
-            login = "ahndwon"
+            login = args.getString("LOGIN")
             val call = provideGithubApi(requireContext()).recievedEvents(login)
             call.enqueue({ response ->
                 val statusCode = response.code()

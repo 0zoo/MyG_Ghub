@@ -1,44 +1,46 @@
 package xyz.youngzz.myg_ghub.view.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
 import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.model.User
 import xyz.youngzz.myg_ghub.api.provideGithubApi
+import xyz.youngzz.myg_ghub.utils.disableShiftMode
 import xyz.youngzz.myg_ghub.utils.enqueue
-import xyz.youngzz.myg_ghub.view.ui.fragment.*
+import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentNews
+import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentNotification
+import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentProfile
+import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentSearch
 
 
 class MainActivity : AppCompatActivity() {
 
     private var content: FrameLayout? = null
     private lateinit var user: User
-    private lateinit var fragments : List<Fragment>
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigationNews -> {
-                val fragment = FragmentNews.newInstance(user.login)
-                addFragment(fragment)
+                addFragment(FragmentNews.newInstance(user.login),FRAGMENT_TAGS[0])
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationSearch -> {
-                val fragment = FragmentSearch()
-                addFragment(fragment)
+                addFragment(FragmentSearch(),FRAGMENT_TAGS[1])
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationNotification -> {
-                val fragment = FragmentNotification()
-                addFragment(fragment)
+                addFragment(FragmentNotification(),FRAGMENT_TAGS[2])
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationProfile -> {
-                val fragment = FragmentProfile()
-                addFragment(fragment)
+                addFragment(FragmentProfile(),FRAGMENT_TAGS[3])
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -48,12 +50,13 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         val TAG = MainActivity::class.java.simpleName
+        val FRAGMENT_TAGS = listOf("NEWS","SEARCH","NOTIFICATION","PROFILE")
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         provideGithubApi(this).getCurrentUser().enqueue({ response ->
             val statusCode = response.code()
@@ -72,10 +75,8 @@ class MainActivity : AppCompatActivity() {
             Timber.e(t.localizedMessage)
         })
 
+        addFragment(FragmentProfile(),FRAGMENT_TAGS[3])
 
-
-        val fragment = FragmentSearch.newInstance()
-        addFragment(fragment)
 
         content = findViewById(R.id.content)
         val navigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
@@ -83,18 +84,21 @@ class MainActivity : AppCompatActivity() {
 
         //navigation.disableShiftMode()
 
-        navigation.getMenu().getItem(1).setChecked(true);
+        navigation.getMenu().getItem(3).setChecked(true);
 
 
     }
 
-    private fun addFragment(fragment: Fragment) {
+    @SuppressLint("PrivateResource")
+    private fun addFragment(fragment: Fragment, tag : String) {
         supportFragmentManager
                 .beginTransaction()
                 .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-                .replace(R.id.content, fragment, fragment.javaClass.simpleName)
+                .replace(R.id.content, fragment, tag)
                 .commit()
+
     }
+
 
 
 
