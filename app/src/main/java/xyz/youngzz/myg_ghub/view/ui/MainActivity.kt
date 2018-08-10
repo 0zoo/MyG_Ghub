@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
@@ -91,18 +92,21 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("PrivateResource")
     private fun addFragment(fragment: Fragment, tag : String) {
-        supportFragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-                .replace(R.id.content, fragment, tag)
-                .commit()
+        supportFragmentManager.inTransaction {
+            setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+            replace(R.id.content, fragment, tag)
+        }
+
 
     }
 
-
-
-
 }
+
+inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
+    beginTransaction().func().commit()
+}
+
+
 
 
 
