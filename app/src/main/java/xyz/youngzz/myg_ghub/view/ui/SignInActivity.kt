@@ -38,7 +38,7 @@ class SignInActivity : AppCompatActivity() {
 
         signInButton.setOnClickListener {
             val authUri = Uri.Builder().scheme("https")
-                    .authority("github.com")
+                    .authority("github.co")
                     .appendPath("login")
                     .appendPath("oauth")
                     .appendPath("authorize")
@@ -72,8 +72,8 @@ class SignInActivity : AppCompatActivity() {
     private fun getAccessToken(code: String) {
         val call = authApi.getAccessToken(CLIENT_ID, CLIENT_SECRET, code)
 
-        call.enqueue({
-            it.body()?.let {
+        call.enqueue({ response ->
+            response.body()?.let {
 
                 updateToken(this, it.accessToken)
 

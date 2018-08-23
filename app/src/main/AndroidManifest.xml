@@ -19,6 +19,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -30,8 +31,7 @@
                     android:scheme="githubapp" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.ui.MainActivity"></activity>
+        <activity android:name=".view.ui.MainActivity" />
     </application>
 
 </manifest>

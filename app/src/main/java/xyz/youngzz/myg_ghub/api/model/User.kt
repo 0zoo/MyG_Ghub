@@ -1,27 +1,24 @@
 package xyz.youngzz.myg_ghub.api.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-const val NONE = "none"
+const val NOT_SET = "Not Set"
 
-data class User(
+data class User (
         val login:String,
         val id: Int,
 
         @field:SerializedName("avatar_url")
         val avatarUrl: String,
-        val userDetail: UserDetail?
-)
-
-data class UserDetail(
-        val name: String = NONE,
+        val name: String = NOT_SET,
         val type : String,
 
-        val company : String = NONE,
-        val blog : String = NONE,
-        val location : String = NONE,
-        val email : String = NONE,
-        val bio : String = NONE,
+        val company : String = NOT_SET,
+        val blog : String = NOT_SET,
+        val location : String = NOT_SET,
+        val email : String = NOT_SET,
+        val bio : String = NOT_SET,
 
         val followers: Int,
         val following: Int,
@@ -35,7 +32,8 @@ data class UserDetail(
         val createdAt: String,
         @field:SerializedName("updated_at")
         val updatedAt: String
-)
+) : Serializable
+
 
 data class Org(
         val login:String,

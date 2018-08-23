@@ -12,5 +12,6 @@
     <string name="created">created repository</string>
     <string name="fork">forks a repository</string>
     <string name="push">push to a repository branch</string>
+    <string name="not_set">Not Set</string>
 
 </resources>

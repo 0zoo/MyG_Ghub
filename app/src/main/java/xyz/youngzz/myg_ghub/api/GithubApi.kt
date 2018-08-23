@@ -18,5 +18,4 @@ interface GithubApi {
     @GET("users/{login}/received_events")
     fun recievedEvents(@Path("login") login : String): Call<List<ReceivedEventsResponse>>
 
-
 }

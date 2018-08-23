@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationProfile -> {
-                addFragment(FragmentProfile(),FRAGMENT_TAGS[3])
+                addFragment(FragmentProfile.newInstance(user),FRAGMENT_TAGS[3])
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -76,8 +76,7 @@ class MainActivity : AppCompatActivity() {
             Timber.e(t.localizedMessage)
         })
 
-        addFragment(FragmentProfile(),FRAGMENT_TAGS[3])
-
+        addFragment(FragmentSearch(),FRAGMENT_TAGS[1])
 
         content = findViewById(R.id.content)
         val navigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
@@ -85,7 +84,7 @@ class MainActivity : AppCompatActivity() {
 
         //navigation.disableShiftMode()
 
-        navigation.getMenu().getItem(3).setChecked(true);
+        navigation.getMenu().getItem(1).setChecked(true);
 
 
     }
