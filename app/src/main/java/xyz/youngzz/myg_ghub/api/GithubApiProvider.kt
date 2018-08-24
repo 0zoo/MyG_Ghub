@@ -6,6 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 val loggingInterceptor: HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY
 }
@@ -33,4 +34,3 @@ fun provideGithubApi(context: Context) = Retrofit.Builder().apply {
     client(authHttpClient(context))
     addConverterFactory(GsonConverterFactory.create())
 }.build().create(GithubApi::class.java)!!
-

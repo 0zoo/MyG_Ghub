@@ -1,5 +1,6 @@
 package xyz.youngzz.myg_ghub.view.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.model.User
 import xyz.youngzz.myg_ghub.utils.GlideApp
+import xyz.youngzz.myg_ghub.view.ui.UserListActivity
 
 class FragmentProfile : Fragment() {
 
@@ -35,11 +37,41 @@ class FragmentProfile : Fragment() {
 
         with(rootView) {
             toolbar_title.text = user.login
+
             nameTextView.text = user.name
             bioTextView.text = user.bio
+            Timber.i(user.company)
+
             repoCountTextView.text = user.publicRepos.toString()
             followerCountTextView.text = user.followers.toString()
             followingCountTextView.text = user.following.toString()
+
+            starCountTextView.text = user.starredCount.toString()
+
+            companyTextView.text = user.company
+            locationTextView.text = user.location
+            blogTextView.text = user.blog
+            emailTextView.text = user.email
+
+            val createdStr = "Created At ${user.createdAt.split("T")[0]}"
+            val updatedStr = "Updated At ${user.updatedAt.split("T")[0]}"
+            createdAtTextView.text = createdStr
+            updatedAtTextView.text = updatedStr
+
+            followerCountTextView.setOnClickListener {
+                Timber.i("click!!")
+                val intent = Intent(context,UserListActivity::class.java)
+                intent.putExtra("OWNER",user.login)
+                intent.putExtra("ACTION","Follower")
+                startActivity(intent)
+            }
+
+            followingCountTextView.setOnClickListener {
+                val intent = Intent(context,UserListActivity::class.java)
+                intent.putExtra("OWNER",user.login)
+                intent.putExtra("ACTION","Following")
+                startActivity(intent)
+            }
         }
 
         return rootView

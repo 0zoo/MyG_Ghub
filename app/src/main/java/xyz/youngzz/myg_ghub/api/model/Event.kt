@@ -1,6 +1,5 @@
 package xyz.youngzz.myg_ghub.api.model
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class ReceivedEventsResponse (

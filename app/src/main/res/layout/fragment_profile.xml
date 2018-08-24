@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme"
         android:id="@+id/appbar"
-        android:padding="8dp">
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -199,11 +199,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bioTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline11" />
 
     <View
         android:id="@+id/divider2"
@@ -254,7 +255,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="230dp" />
+        app:layout_constraintGuide_begin="235dp" />
 
 
     <android.support.constraint.Guideline
@@ -262,7 +263,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="260dp" />
+        app:layout_constraintGuide_begin="270dp" />
 
 
     <android.support.constraint.Guideline
@@ -292,14 +293,14 @@
         app:layout_constraintTop_toBottomOf="@+id/guideline10" />
 
     <TextView
-        android:id="@+id/orgTextView"
+        android:id="@+id/companyTextView"
         android:layout_width="0dp"
         android:layout_height="24dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:drawableStart="@drawable/ic_group_black_24dp"
-        android:drawablePadding="16dp"
+        android:drawablePadding="12dp"
         android:paddingTop="4dp"
         android:text="@string/not_set"
         app:layout_constraintEnd_toEndOf="parent"
@@ -314,13 +315,13 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:drawablePadding="16dp"
+        android:drawablePadding="12dp"
         android:drawableStart="@drawable/ic_location_on_black_24dp"
         android:paddingTop="4dp"
         android:text="@string/not_set"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/orgTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/companyTextView" />
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="0dp"
@@ -328,7 +329,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:drawablePadding="16dp"
+        android:drawablePadding="12dp"
         android:drawableStart="@drawable/ic_mail_outline_black_24dp"
         android:paddingTop="4dp"
         android:text="@string/not_set"
@@ -343,7 +344,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:drawablePadding="16dp"
+        android:drawablePadding="12dp"
         android:drawableStart="@drawable/ic_attachment_black_24dp"
         android:paddingTop="4dp"
         android:text="@string/not_set"
@@ -355,23 +356,26 @@
         android:id="@+id/createdAtTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:paddingTop="4dp"
+        android:textAlignment="center"
         android:text="Joined On 2018-04-11"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toEndOf="@+id/updatedAtTextView"
         app:layout_constraintTop_toBottomOf="@+id/blogTextView" />
 
     <TextView
         android:id="@+id/updatedAtTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:drawablePadding="12dp"
+        android:drawableStart="@drawable/ic_event_black_24dp"
+        android:paddingTop="4dp"
         android:text="Updated On 2018-04-11"
-        app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blogTextView" />
 

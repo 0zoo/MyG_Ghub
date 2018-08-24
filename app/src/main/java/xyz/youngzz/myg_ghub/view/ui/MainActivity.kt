@@ -6,7 +6,6 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
-import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
 import timber.log.Timber
@@ -66,6 +65,13 @@ class MainActivity : AppCompatActivity() {
                 result?.let {
                    Timber.i(it.toString())
                     user = it
+
+                    provideGithubApi(this).getStarredRepo(user.login).enqueue({ response ->
+                        response.body()?.let {
+                            user.starredCount = it.size
+                        }
+                    },{})
+
                 }
 
             } else {
@@ -76,13 +82,14 @@ class MainActivity : AppCompatActivity() {
             Timber.e(t.localizedMessage)
         })
 
+
         addFragment(FragmentSearch(),FRAGMENT_TAGS[1])
 
         content = findViewById(R.id.content)
         val navigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        //navigation.disableShiftMode()
+        navigation.disableShiftMode()
 
         navigation.getMenu().getItem(1).setChecked(true);
 

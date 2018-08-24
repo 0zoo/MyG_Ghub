@@ -29,7 +29,6 @@ class SignInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
-        Timber.plant(Timber.DebugTree())
 
         getToken(this)?.let{
             Timber.i("이미 로그인한")
