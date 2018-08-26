@@ -2,10 +2,10 @@ package xyz.youngzz.myg_ghub.view.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideApp
 import kotlinx.android.synthetic.main.list_item_news.view.*
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.model.ReceivedEventsResponse
-import xyz.youngzz.myg_ghub.utils.GlideApp
 import xyz.youngzz.myg_ghub.utils.convertEventType
 import xyz.youngzz.myg_ghub.utils.getDateFromISO
 import xyz.youngzz.myg_ghub.view.viewholder.NewsViewHolder

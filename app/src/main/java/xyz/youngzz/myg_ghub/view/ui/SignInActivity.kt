@@ -31,13 +31,12 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
 
         getToken(this)?.let{
-            Timber.i("이미 로그인한")
             startActivity<MainActivity>()
         }
 
         signInButton.setOnClickListener {
             val authUri = Uri.Builder().scheme("https")
-                    .authority("github.co")
+                    .authority("github.com")
                     .appendPath("login")
                     .appendPath("oauth")
                     .appendPath("authorize")
