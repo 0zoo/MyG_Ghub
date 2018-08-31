@@ -5,6 +5,9 @@ import android.content.Context
 import android.support.design.internal.BottomNavigationItemView
 import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -84,10 +87,18 @@ fun String.getDateFromISO(): String {
 }
 
 
+inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
+    beginTransaction().func().commit()
+}
 
 
-
-
+@SuppressLint("PrivateResource")
+fun Fragment.addFagment(id : Int, tag: String, fragmentManager : FragmentManager){
+    fragmentManager.inTransaction {
+        setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+        replace(id, this@addFagment, tag)
+    }
+}
 
 
 

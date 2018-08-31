@@ -1,18 +1,13 @@
 package xyz.youngzz.myg_ghub.view.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
-import android.widget.FrameLayout
 import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.model.User
 import xyz.youngzz.myg_ghub.api.provideGithubApi
-import xyz.youngzz.myg_ghub.utils.disableShiftMode
+import xyz.youngzz.myg_ghub.utils.addFagment
 import xyz.youngzz.myg_ghub.utils.enqueue
 import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentNews
 import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentNotification
@@ -22,25 +17,25 @@ import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentSearch
 
 class MainActivity : AppCompatActivity() {
 
-    private var content: FrameLayout? = null
+    //private var content: FrameLayout? = null
     private lateinit var user: User
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigationNews -> {
-                addFragment(FragmentNews.newInstance(user.login),FRAGMENT_TAGS[0])
+                FragmentNews.newInstance(user.login).addFagment(R.id.content,FRAGMENT_TAGS[0],supportFragmentManager)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationSearch -> {
-                addFragment(FragmentSearch(),FRAGMENT_TAGS[1])
+                FragmentSearch().addFagment(R.id.content,FRAGMENT_TAGS[1],supportFragmentManager)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationNotification -> {
-                addFragment(FragmentNotification(),FRAGMENT_TAGS[2])
+                FragmentNotification().addFagment(R.id.content,FRAGMENT_TAGS[2],supportFragmentManager)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationProfile -> {
-                addFragment(FragmentProfile.newInstance(user),FRAGMENT_TAGS[3])
+                FragmentProfile.newInstance(user).addFagment(R.id.content,FRAGMENT_TAGS[3],supportFragmentManager)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -49,7 +44,6 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        val TAG = MainActivity::class.java.simpleName
         val FRAGMENT_TAGS = listOf("NEWS","SEARCH","NOTIFICATION","PROFILE")
     }
 
@@ -72,6 +66,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     },{})
 
+                    setupBottomNavi()
                 }
 
             } else {
@@ -83,34 +78,28 @@ class MainActivity : AppCompatActivity() {
         })
 
 
-        addFragment(FragmentSearch(),FRAGMENT_TAGS[1])
 
-        content = findViewById(R.id.content)
+
+    }
+
+    private fun setupBottomNavi(){
+
+        FragmentNews.newInstance(user.login).addFagment(R.id.content,FRAGMENT_TAGS[0],supportFragmentManager)
+
+
+        //content = findViewById(R.id.content)
         val navigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        navigation.disableShiftMode()
+        //navigation.disableShiftMode()
 
-        navigation.getMenu().getItem(1).setChecked(true);
-
-
+        //navigation.getMenu().getItem(0).setChecked(true)
     }
 
-    @SuppressLint("PrivateResource")
-    private fun addFragment(fragment: Fragment, tag : String) {
-        supportFragmentManager.inTransaction {
-            setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-            replace(R.id.content, fragment, tag)
-        }
-
-
-    }
 
 }
 
-inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
-    beginTransaction().func().commit()
-}
+
 
 
 

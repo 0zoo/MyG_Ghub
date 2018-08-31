@@ -8,12 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideApp
+import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.model.User
 import xyz.youngzz.myg_ghub.view.ui.UserListActivity
-import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 
 
 class FragmentProfile : Fragment() {
@@ -24,8 +24,8 @@ class FragmentProfile : Fragment() {
             fragment.setUserData(user)
             return fragment
         }
-    }
 
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -39,6 +39,9 @@ class FragmentProfile : Fragment() {
                 .into(rootView.avatarImage)
 
         with(rootView) {
+
+            Timber.i(user.toString())
+
             toolbar_title.text = user.login
 
             nameTextView.text = user.name
@@ -61,7 +64,6 @@ class FragmentProfile : Fragment() {
             updatedAtTextView.text = updatedStr
 
             followerCountTextView.setOnClickListener {
-                Timber.i("click!!")
                 val intent = Intent(context,UserListActivity::class.java)
                 intent.putExtra("OWNER",user.login)
                 intent.putExtra("ACTION","Follower")
@@ -74,9 +76,11 @@ class FragmentProfile : Fragment() {
                 intent.putExtra("ACTION","Following")
                 startActivity(intent)
             }
+
+            repoCountTextView.setOnClickListener {
+
+            }
         }
-
-
 
         val uri = Uri.parse("https://ghchart.rshah.org/${user.login}")
         GlideToVectorYou.justLoadImage(activity, uri, rootView.contributionsImageView)
@@ -86,9 +90,8 @@ class FragmentProfile : Fragment() {
 
     private lateinit var user: User
 
-    fun setUserData(user: User) {
+    private fun setUserData(user: User) {
         this.user = user
     }
-
 
 }

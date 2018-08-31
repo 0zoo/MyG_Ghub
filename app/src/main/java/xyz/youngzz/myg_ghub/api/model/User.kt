@@ -22,8 +22,7 @@ data class User (
         private val _location : String?,
         @field:SerializedName("email")
         private val _email : String?,
-        @field:SerializedName("bio")
-        private val _bio : String?,
+        val bio : String,
 
         val followers: Int = 0,
         val following: Int = 0,
@@ -49,8 +48,6 @@ data class User (
         val location get() = _location ?: NOT_SET
 
         val email get() = _email ?: NOT_SET
-
-        val bio get() = _bio ?: NOT_SET
 
 }
 

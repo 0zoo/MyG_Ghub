@@ -16,6 +16,9 @@ interface GithubApi {
     @GET("user")
     fun getCurrentUser(): Call<User>
 
+    @GET("users/{login}")
+    fun getOtherUser(@Path("login") login : String): Call<User>
+
     @GET("users/{login}/received_events")
     fun recievedEvents(@Path("login") login : String): Call<List<ReceivedEventsResponse>>
 
