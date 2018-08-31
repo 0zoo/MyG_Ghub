@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_user_list.*
+import kotlinx.android.synthetic.main.toolbar_header.*
+import org.jetbrains.anko.colorAttr
 import retrofit2.Call
 import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
@@ -33,13 +35,20 @@ class UserListActivity : AppCompatActivity() {
         val action = intent.extras.getString("ACTION")
 
 
+        /*
         toolbar.apply {
             title= action
-            setTitleTextColor(Color.WHITE)
+            //setTitleTextColor(Color.WHITE)
         }
+        */
+
+        toolbar_title.text = action
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayShowHomeEnabled(true)
+        }
 
 
         when(action){
@@ -54,16 +63,6 @@ class UserListActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return if (item?.itemId == android.R.id.home) {
-            finish()
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
-
     private fun bindingUsers(call : Call<List<User>>){
 
         call.enqueue({response ->
@@ -75,14 +74,17 @@ class UserListActivity : AppCompatActivity() {
                     listAdapter.notifyDataSetChanged()
                 }
 
-
             } else {
                 Timber.e("error - $statusCode")
             }
-
         },{
             Timber.e(it.localizedMessage)
         })
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

@@ -7,21 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:id="@+id/toolbar"
-        >
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
-    </android.support.v7.widget.Toolbar>
-
+    <include layout="@layout/toolbar_header" />
 
     <ImageView
         android:id="@+id/avatarImage"
@@ -44,7 +30,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:text="Youngju Lee"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -355,7 +340,6 @@
         android:layout_marginTop="8dp"
         android:paddingTop="4dp"
         android:textAlignment="center"
-        android:text="Joined On 2018-04-11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/updatedAtTextView"
         app:layout_constraintTop_toBottomOf="@+id/blogTextView" />
@@ -369,7 +353,6 @@
         android:drawablePadding="12dp"
         android:drawableStart="@drawable/ic_event_black_24dp"
         android:paddingTop="4dp"
-        android:text="Updated On 2018-04-11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blogTextView" />
 

@@ -3,6 +3,7 @@ package xyz.youngzz.myg_ghub.view.ui.fragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,18 +11,22 @@ import android.view.ViewGroup
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideApp
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import kotlinx.android.synthetic.main.fragment_profile.view.*
+import kotlinx.android.synthetic.main.toolbar_header.view.*
 import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.model.User
+import xyz.youngzz.myg_ghub.utils.fm
+import xyz.youngzz.myg_ghub.utils.removeFragment
 import xyz.youngzz.myg_ghub.view.ui.UserListActivity
 
 
 class FragmentProfile : Fragment() {
 
     companion object {
-        fun newInstance(user: User): FragmentProfile {
+        fun newInstance(user: User, isBackAvailable: Boolean): FragmentProfile {
             val fragment = FragmentProfile()
             fragment.setUserData(user)
+            fragment.isBackAvailable = isBackAvailable
             return fragment
         }
 
@@ -64,20 +69,36 @@ class FragmentProfile : Fragment() {
             updatedAtTextView.text = updatedStr
 
             followerCountTextView.setOnClickListener {
-                val intent = Intent(context,UserListActivity::class.java)
-                intent.putExtra("OWNER",user.login)
-                intent.putExtra("ACTION","Follower")
+                val intent = Intent(context, UserListActivity::class.java)
+                intent.putExtra("OWNER", user.login)
+                intent.putExtra("ACTION", "Follower")
                 startActivity(intent)
             }
 
             followingCountTextView.setOnClickListener {
-                val intent = Intent(context,UserListActivity::class.java)
-                intent.putExtra("OWNER",user.login)
-                intent.putExtra("ACTION","Following")
+                val intent = Intent(context, UserListActivity::class.java)
+                intent.putExtra("OWNER", user.login)
+                intent.putExtra("ACTION", "Following")
                 startActivity(intent)
             }
 
             repoCountTextView.setOnClickListener {
+
+            }
+
+            val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottomNavigation)
+
+            if (isBackAvailable) {
+                bottomNav.animate().translationY(bottomNav.height.toFloat())
+
+                with(this.toolbar){
+                    setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+                    setNavigationOnClickListener {
+                        this@FragmentProfile.removeFragment()
+                        fm.popBackStack()
+
+                    }
+                }
 
             }
         }
@@ -89,9 +110,17 @@ class FragmentProfile : Fragment() {
     }
 
     private lateinit var user: User
+    private var isBackAvailable: Boolean = false
 
     private fun setUserData(user: User) {
         this.user = user
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        bottomNav.animate().translationY(0f)
+    }
+
 
 }

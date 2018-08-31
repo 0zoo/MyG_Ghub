@@ -31,6 +31,12 @@ class FragmentNews : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val rootView = inflater.inflate(R.layout.fragment_news, container, false)
+
         arguments?.let { args ->
             login = args.getString("LOGIN")
             val call = provideGithubApi(requireContext()).recievedEvents(login)
@@ -55,11 +61,6 @@ class FragmentNews : Fragment() {
 
         }
 
-
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_news, container, false)
 
         rootView.newsListView.layoutManager = LinearLayoutManager(this.requireContext())
         rootView.newsListView.adapter = NewsListAdapter()

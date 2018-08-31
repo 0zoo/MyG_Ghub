@@ -92,13 +92,23 @@ inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Fragmen
 }
 
 
-@SuppressLint("PrivateResource")
-fun Fragment.addFagment(id : Int, tag: String, fragmentManager : FragmentManager){
-    fragmentManager.inTransaction {
-        setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-        replace(id, this@addFagment, tag)
+fun Fragment.addFragment(id : Int, tag: String){
+    fm.inTransaction {
+        //setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
+        replace(id, this@addFragment, tag)
+        addToBackStack(null)
     }
 }
+
+fun Fragment.removeFragment(){
+    fm.inTransaction { remove(this@removeFragment) }
+}
+
+fun setFragmentManager(fragmentManager : FragmentManager){
+    fm = fragmentManager
+}
+
+lateinit var fm : FragmentManager
 
 
 

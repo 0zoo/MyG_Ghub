@@ -7,8 +7,10 @@ import timber.log.Timber
 import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.model.User
 import xyz.youngzz.myg_ghub.api.provideGithubApi
-import xyz.youngzz.myg_ghub.utils.addFagment
+import xyz.youngzz.myg_ghub.utils.addFragment
+import xyz.youngzz.myg_ghub.utils.disableShiftMode
 import xyz.youngzz.myg_ghub.utils.enqueue
+import xyz.youngzz.myg_ghub.utils.setFragmentManager
 import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentNews
 import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentNotification
 import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentProfile
@@ -17,25 +19,24 @@ import xyz.youngzz.myg_ghub.view.ui.fragment.FragmentSearch
 
 class MainActivity : AppCompatActivity() {
 
-    //private var content: FrameLayout? = null
     private lateinit var user: User
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigationNews -> {
-                FragmentNews.newInstance(user.login).addFagment(R.id.content,FRAGMENT_TAGS[0],supportFragmentManager)
+                FragmentNews.newInstance(user.login).addFragment(R.id.content,FRAGMENT_TAGS[0])
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationSearch -> {
-                FragmentSearch().addFagment(R.id.content,FRAGMENT_TAGS[1],supportFragmentManager)
+                FragmentSearch().addFragment(R.id.content,FRAGMENT_TAGS[1])
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationNotification -> {
-                FragmentNotification().addFagment(R.id.content,FRAGMENT_TAGS[2],supportFragmentManager)
+                FragmentNotification().addFragment(R.id.content,FRAGMENT_TAGS[2])
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigationProfile -> {
-                FragmentProfile.newInstance(user).addFagment(R.id.content,FRAGMENT_TAGS[3],supportFragmentManager)
+                FragmentProfile.newInstance(user,false).addFragment(R.id.content,FRAGMENT_TAGS[3])
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -56,10 +57,8 @@ class MainActivity : AppCompatActivity() {
             val statusCode = response.code()
             if (statusCode == 200) {
                 val result = response.body()
-                result?.let {
-                   Timber.i(it.toString())
-                    user = it
-
+                result?.let { _user ->
+                    user = _user
                     provideGithubApi(this).getStarredRepo(user.login).enqueue({ response ->
                         response.body()?.let {
                             user.starredCount = it.size
@@ -84,14 +83,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupBottomNavi(){
 
-        FragmentNews.newInstance(user.login).addFagment(R.id.content,FRAGMENT_TAGS[0],supportFragmentManager)
+        setFragmentManager(supportFragmentManager)
 
+        FragmentNews.newInstance(user.login).addFragment(R.id.content,FRAGMENT_TAGS[0])
 
-        //content = findViewById(R.id.content)
         val navigation = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        //navigation.disableShiftMode()
+        navigation.disableShiftMode()
 
         //navigation.getMenu().getItem(0).setChecked(true)
     }
