@@ -54,7 +54,6 @@ class FragmentNews : Fragment() {
                     Timber.e("error - $statusCode")
                 }
 
-
             }, {
                 Timber.e(it.localizedMessage)
             })

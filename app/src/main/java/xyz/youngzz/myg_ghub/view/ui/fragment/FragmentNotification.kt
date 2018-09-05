@@ -2,15 +2,13 @@ package xyz.youngzz.myg_ghub.view.ui.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_notification.*
 import kotlinx.android.synthetic.main.fragment_notification.view.*
 import xyz.youngzz.myg_ghub.R
+import xyz.youngzz.myg_ghub.view.adapter.TabAdapter
 
 class FragmentNotification : Fragment() {
 
@@ -31,7 +29,7 @@ class FragmentNotification : Fragment() {
     }
 
     private fun setupViewPager(viewPager: ViewPager){
-        val adapter = Adapter(childFragmentManager)
+        val adapter = TabAdapter(childFragmentManager)
         adapter.addFragment(NotificationUnreadFragment(), "Unread")
         adapter.addFragment(NotificationParticipatingFragment(), "Participating")
         adapter.addFragment(NotificationAllFragment(), "All")
@@ -40,19 +38,4 @@ class FragmentNotification : Fragment() {
 
     }
 
-    private class Adapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
-        val fragments = mutableListOf<Fragment>()
-        val titles = mutableListOf<String>()
-
-        override fun getItem(position: Int): Fragment = fragments[position]
-
-        override fun getCount(): Int = fragments.size
-
-        override fun getPageTitle(position: Int): CharSequence? = titles[position]
-
-        fun addFragment(fragment: Fragment, title: String) {
-            fragments.add(fragment)
-            titles.add(title)
-        }
-    }
 }

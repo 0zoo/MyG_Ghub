@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".view.ui.MainActivity" />
         <activity android:name=".view.ui.UserListActivity" />
+        <activity android:name=".view.ui.RepoDetailActivity" />
+        <activity android:name=".view.ui.RepoListActivity"></activity>
     </application>
 
 </manifest>
