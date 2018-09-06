@@ -11,6 +11,6 @@ class RepoListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_repo_list)
     }
 
-    
+
 
 }

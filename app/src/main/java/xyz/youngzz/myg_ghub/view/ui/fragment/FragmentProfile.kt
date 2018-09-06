@@ -86,7 +86,7 @@ class FragmentProfile : Fragment() {
 
             }
 
-            val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottomNavigation)
+            val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
 
             if (isBackAvailable) {
                 bottomNav.animate().translationY(bottomNav.height.toFloat())
@@ -101,10 +101,15 @@ class FragmentProfile : Fragment() {
                 }
 
             }
+
+
+            scroll.isHorizontalScrollBarEnabled = true
         }
 
         val uri = Uri.parse("https://ghchart.rshah.org/${user.login}")
         GlideToVectorYou.justLoadImage(activity, uri, rootView.contributionsImageView)
+
+
 
         return rootView
     }
@@ -118,7 +123,7 @@ class FragmentProfile : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNav.animate().translationY(0f)
     }
 
