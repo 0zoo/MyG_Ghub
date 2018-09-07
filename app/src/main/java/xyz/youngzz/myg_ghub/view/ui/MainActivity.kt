@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     },{})
 
-                    setupBottomNavi()
+                    setupBottomNavigation()
                 }
 
             } else {
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setupBottomNavi(){
+    private fun setupBottomNavigation(){
 
         setFragmentManager(supportFragmentManager)
 

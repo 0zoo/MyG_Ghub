@@ -16,3 +16,7 @@ class NewsViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
 class UserViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context).inflate(R.layout.list_item_user, parent, false)
 )
+
+class RepoViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+        LayoutInflater.from(parent.context).inflate(R.layout.list_item_repo, parent, false)
+)

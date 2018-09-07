@@ -8,6 +8,3 @@ data class Auth(
         @field:SerializedName("token_type")
         val tokenType: String) {
 }
-
-data class GithubOwner(val login: String,
-                       @field:SerializedName("avatar_url") val avatarUrl: String)

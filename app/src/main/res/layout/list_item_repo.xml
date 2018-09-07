@@ -12,7 +12,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/ownerAvatarImage"
+            android:id="@+id/repoPrivateImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginBottom="8dp"
@@ -32,7 +32,7 @@
             android:layout_marginTop="8dp"
             android:text="repoName"
             android:textSize="17sp"
-            app:layout_constraintStart_toEndOf="@+id/ownerAvatarImage"
+            app:layout_constraintStart_toEndOf="@+id/repoPrivateImage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_marginTop="4dp"
             android:text="description"
             android:textSize="13sp"
-            app:layout_constraintStart_toEndOf="@+id/ownerAvatarImage"
+            app:layout_constraintStart_toEndOf="@+id/repoPrivateImage"
             app:layout_constraintTop_toBottomOf="@+id/repoNameText" />
 
         <TextView
@@ -58,12 +58,12 @@
             android:textSize="15sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ownerAvatarImage"
+            app:layout_constraintStart_toEndOf="@+id/repoPrivateImage"
             app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText" />
 
 
         <TextView
-            android:id="@+id/watchCountTextView"
+            android:id="@+id/watchersCountTextView"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginStart="8dp"
@@ -76,7 +76,7 @@
 
 
         <TextView
-            android:id="@+id/starCountTextView"
+            android:id="@+id/stargazersCountTextView"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginStart="8dp"
@@ -84,7 +84,7 @@
             android:drawableStart="@drawable/ic_star_border_black_24dp"
             android:text="0"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/watchCountTextView"
+            app:layout_constraintStart_toEndOf="@+id/watchersCountTextView"
             app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText" />
 
         <ImageView
@@ -94,12 +94,12 @@
             android:src="@drawable/forks"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/starCountTextView"
+            app:layout_constraintStart_toEndOf="@+id/stargazersCountTextView"
             app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText"
             />
 
         <TextView
-            android:id="@+id/forkCountTextView"
+            android:id="@+id/forksCountTextView"
             android:layout_width="24dp"
             android:layout_height="18dp"
             android:text="0"

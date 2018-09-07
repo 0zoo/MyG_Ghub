@@ -17,6 +17,7 @@ import xyz.youngzz.myg_ghub.R
 import xyz.youngzz.myg_ghub.api.model.User
 import xyz.youngzz.myg_ghub.utils.fm
 import xyz.youngzz.myg_ghub.utils.removeFragment
+import xyz.youngzz.myg_ghub.view.ui.RepoListActivity
 import xyz.youngzz.myg_ghub.view.ui.UserListActivity
 
 
@@ -56,7 +57,7 @@ class FragmentProfile : Fragment() {
             followerCountTextView.text = user.followers.toString()
             followingCountTextView.text = user.following.toString()
 
-            starCountTextView.text = user.starredCount.toString()
+            stargazersCountTextView.text = user.starredCount.toString()
 
             companyTextView.text = user.company
             locationTextView.text = user.location
@@ -83,7 +84,9 @@ class FragmentProfile : Fragment() {
             }
 
             repoCountTextView.setOnClickListener {
-
+                val intent = Intent(context, RepoListActivity::class.java)
+                intent.putExtra("LOGIN", user.login)
+                startActivity(intent)
             }
 
             val bottomNav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigation)

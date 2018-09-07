@@ -39,7 +39,7 @@ class FragmentNews : Fragment() {
 
         arguments?.let { args ->
             login = args.getString("LOGIN")
-            val call = provideGithubApi(requireContext()).recievedEvents(login)
+            val call = provideGithubApi(requireContext()).receivedEvents(login)
             call.enqueue({ response ->
                 val statusCode = response.code()
                 if (statusCode == 200) {

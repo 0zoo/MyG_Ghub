@@ -20,7 +20,7 @@ interface GithubApi {
     fun getOtherUser(@Path("login") login : String): Call<User>
 
     @GET("users/{login}/received_events")
-    fun recievedEvents(@Path("login") login : String): Call<List<ReceivedEventsResponse>>
+    fun receivedEvents(@Path("login") login : String): Call<List<ReceivedEventsResponse>>
 
     @GET("users/{login}/followers")
     fun getFollowers(@Path("login") login: String): Call<List<User>>
@@ -31,5 +31,7 @@ interface GithubApi {
     @GET("/users/{login}/starred")
     fun getStarredRepo(@Path("login") login: String): Call<List<Repo>>
 
+    @GET("/users/{login}/repos")
+    fun getUserRepos(@Path("login") login: String): Call<List<Repo>>
 
 }

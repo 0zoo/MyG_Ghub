@@ -21,7 +21,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="imguru/kotlin-lecture"
-            app:layout_constraintStart_toEndOf="@+id/ownerAvatarImage"
+            app:layout_constraintStart_toEndOf="@+id/repoPrivateImage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -35,11 +35,11 @@
             android:layout_marginTop="8dp"
             android:text="ourguide"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/ownerAvatarImage"
+            app:layout_constraintStart_toEndOf="@+id/repoPrivateImage"
             app:layout_constraintTop_toBottomOf="@+id/repoNameText" />
 
         <ImageView
-            android:id="@+id/ownerAvatarImage"
+            android:id="@+id/repoPrivateImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginBottom="8dp"

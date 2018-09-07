@@ -30,7 +30,7 @@ class SearchRepoListAdapter : RecyclerView.Adapter<SearchRepoViewHolder>() {
             GlideApp.with(this)
                     .load(item.owner.avatarUrl)
                     .placeholder(R.drawable.ic_github_logo)
-                    .into(ownerAvatarImage)
+                    .into(repoPrivateImage)
         }
     }
 }
