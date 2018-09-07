@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/ownerAvatarImage"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -30,8 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:textSize="17sp"
             android:text="repoName"
+            android:textSize="17sp"
             app:layout_constraintStart_toEndOf="@+id/ownerAvatarImage"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,18 +52,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
             android:text="Language"
-            android:textStyle="italic"
             android:textSize="15sp"
+            android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ownerAvatarImage"
             app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText" />
 
 
         <TextView
-            android:id="@+id/blogTextView"
+            android:id="@+id/watchCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_marginStart="8dp"
+            android:drawablePadding="4dp"
+            android:drawableStart="@drawable/ic_remove_red_eye_black_24dp"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/repoLanguageText"
+            app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText" />
+
+
+        <TextView
+            android:id="@+id/starCountTextView"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginStart="8dp"
@@ -71,7 +84,27 @@
             android:drawableStart="@drawable/ic_star_border_black_24dp"
             android:text="0"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/repoLanguageText"
+            app:layout_constraintStart_toEndOf="@+id/watchCountTextView"
+            app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText" />
+
+        <ImageView
+            android:id="@+id/forkIcon"
+            android:layout_width="22dp"
+            android:layout_height="20dp"
+            android:src="@drawable/forks"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/starCountTextView"
+            app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText"
+            />
+
+        <TextView
+            android:id="@+id/forkCountTextView"
+            android:layout_width="24dp"
+            android:layout_height="18dp"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/forkIcon"
             app:layout_constraintTop_toBottomOf="@+id/repoDescriptionText" />
 
 
